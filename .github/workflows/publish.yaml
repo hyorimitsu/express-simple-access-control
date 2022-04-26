@@ -1,4 +1,4 @@
-name: Publish package to GitHub Packages
+name: Publish package to npmjs
 
 on:
   release:
@@ -17,8 +17,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '16.x'
-          registry-url: 'https://npm.pkg.github.com'
-          scope: '@hyorimitsu'
+          registry-url: 'https://registry.npmjs.org'
 
       - name: Publish
         run: |
@@ -26,4 +25,4 @@ jobs:
           yarn run build
           yarn publish
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

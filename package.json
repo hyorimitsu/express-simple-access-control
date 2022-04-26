@@ -1,16 +1,16 @@
 {
-  "name": "@hyorimitsu/express-simple-access-control",
+  "name": "express-simple-access-control",
   "version": "0.0.4",
   "license": "MIT",
   "author": "Hiroki Yorimitsu <dev.yorimitsu@gmail.com> (https://github.com/hyorimitsu)",
-  "main": "lib/index.js",
+  "homepage": "https://github.com/hyorimitsu/express-simple-access-control",
+  "bugs": "https://github.com/hyorimitsu/express-simple-access-control/issues",
   "repository": {
     "type": "git",
-    "url": "https://github.com/hyorimitsu/express-simple-access-control.git"
+    "url": "https://github.com/hyorimitsu/express-simple-access-control.git",
+    "directory": "src"
   },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
-  },
+  "main": "dist/index.js",
   "scripts": {
     "build": "tsc"
   },
