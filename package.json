@@ -1,6 +1,6 @@
 {
   "name": "express-simple-access-control",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "license": "MIT",
   "author": "Hiroki Yorimitsu <dev.yorimitsu@gmail.com> (https://github.com/hyorimitsu)",
   "main": "lib/index.js",
