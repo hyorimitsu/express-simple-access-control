@@ -1,0 +1,47 @@
+name: Bump version
+
+on:
+  push:
+    tags:
+      - "*.*.*"
+
+jobs:
+  version-up:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Get pushed tag
+        id: tag
+        run: |
+          VERSION=$(git tag --sort=-creatordate | head -1)
+          echo ::set-output name=VERSION::$VERSION
+
+      - name: Update package.json
+        run: |
+          npm --no-git-tag-version version ${VERSION}
+        env:
+          VERSION: ${{ steps.tag.outputs.VERSION }}
+
+      - name: Setup git
+        run: |
+          git config --local user.name "Github <noreply@github.com>"
+          git config --local user.email "52403055+github-actions[bot]@users.noreply.github.com"
+
+      - name: Commit files
+        run: |
+          git add .
+          git commit -m "Bump version: ${VERSION}" -a
+          git push
+        env:
+          VERSION: ${{ steps.tag.outputs.VERSION }}
+
+      - name: Move tag
+        run:
+          git tag -d ${VERSION}
+          git push -d origin ${VERSION}
+          git tag ${VERSION}
+          git push origin ${VERSION}
+        env:
+          VERSION: ${{ steps.tag.outputs.VERSION }}
