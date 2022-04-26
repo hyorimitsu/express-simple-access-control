@@ -33,7 +33,7 @@ jobs:
         run: |
           git add .
           git commit -m "Bump version: ${VERSION}" -a
-          git push
+          git push origin HEAD:main
         env:
           VERSION: ${{ steps.tag.outputs.VERSION }}
 
