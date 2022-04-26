@@ -26,7 +26,7 @@ jobs:
 
       - name: Setup git
         run: |
-          git config --local user.name "Github <noreply@github.com>"
+          git config --local user.name "GitHub <noreply@github.com>"
           git config --local user.email "52403055+github-actions[bot]@users.noreply.github.com"
 
       - name: Commit files
