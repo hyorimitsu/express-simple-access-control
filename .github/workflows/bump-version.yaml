@@ -38,7 +38,7 @@ jobs:
           VERSION: ${{ steps.tag.outputs.VERSION }}
 
       - name: Move tag
-        run:
+        run: |
           git tag -d ${VERSION}
           git push -d origin ${VERSION}
           git tag ${VERSION}
