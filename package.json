@@ -1,5 +1,5 @@
 {
-  "name": "express-simple-access-control",
+  "name": "@hyorimitsu/express-simple-access-control",
   "version": "0.0.3",
   "license": "MIT",
   "author": "Hiroki Yorimitsu <dev.yorimitsu@gmail.com> (https://github.com/hyorimitsu)",
