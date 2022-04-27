@@ -13,8 +13,8 @@ const useAccessControlMiddleware = (app: core.Express, option: Option) => {
         ipFilterOption,
     } = option;
 
-    if (ipFilterOption) app.use(ipFilterMiddleware(ipFilterOption));
-    if (basicAuthOption) app.use(basicAuthMiddleware(basicAuthOption));
+    if (ipFilterOption) app.use('*', ipFilterMiddleware(ipFilterOption));
+    if (basicAuthOption) app.use('*', basicAuthMiddleware(basicAuthOption));
 };
 
 export default useAccessControlMiddleware;
