@@ -1,13 +1,13 @@
 import {NextFunction, Request, Response} from "express";
 import getClientIP from "./client_ip";
 
-export type Option = {
+type Option = {
     allowsIPs: string[]
     errStatusCode: number
     errMessage: string
 };
 
-const ipFilter = (option: Option) => {
+const ipFilterMiddleware = (option: Option) => {
     const {
         allowsIPs = [],
         errStatusCode = 401,
@@ -24,4 +24,5 @@ const ipFilter = (option: Option) => {
     };
 };
 
-export default ipFilter;
+export default ipFilterMiddleware;
+export {Option};

@@ -1,27 +1,28 @@
 import * as expressBasicAuth from "express-basic-auth";
 
-export type Option = {
+type Option = {
     users: User[]
 };
 
-export type User = {
+type User = {
     username: string
     password: string
 };
 
 const createUsersObject = (users: User[]) => {
-    const result: {[key: string]: string} = {};
+    const result: { [key: string]: string } = {};
     for (const user of users) {
         result[user.username] = user.password;
     }
     return result;
 };
 
-const basicAuth = (option: Option) => {
+const basicAuthMiddleware = (option: Option) => {
     return expressBasicAuth({
         challenge: true,
         users: createUsersObject(option.users),
     });
 };
 
-export default basicAuth;
+export default basicAuthMiddleware;
+export {Option, User};
