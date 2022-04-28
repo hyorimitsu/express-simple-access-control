@@ -4,12 +4,15 @@ import useAccessControlMiddleware, {Option} from "express-simple-access-control"
 
 const app = express();
 
+// apply access restrictions
 useAccessControlMiddleware(app, {
+    // enable basic auth
     basicAuthOption: {
         users: [
             {username: 'username', password: 'password'},
         ],
     },
+    // disable ip filter
     // ipFilterOption: {
     //     allowsIPs: ['XXX.XXX.XXX.XXX'],
     //     errStatusCode: 404,
