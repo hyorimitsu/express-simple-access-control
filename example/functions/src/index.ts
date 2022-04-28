@@ -1,9 +1,24 @@
 import * as functions from "firebase-functions";
+import * as express from "express";
+import useAccessControlMiddleware, {Option} from "express-simple-access-control";
 
-// // Start writing Firebase Functions
-// // https://firebase.google.com/docs/functions/typescript
-//
-// export const helloWorld = functions.https.onRequest((request, response) => {
-//   functions.logger.info("Hello logs!", {structuredData: true});
-//   response.send("Hello from Firebase!");
-// });
+const app = express();
+
+useAccessControlMiddleware(app, {
+    basicAuthOption: {
+        users: [
+            {username: 'username', password: 'password'},
+        ],
+    },
+    // ipFilterOption: {
+    //     allowsIPs: ['XXX.XXX.XXX.XXX'],
+    //     errStatusCode: 404,
+    //     errMessage: 'Not Found',
+    // },
+} as Option);
+
+app.use(express.static(__dirname + '/public/'));
+
+const middleware = functions.https.onRequest(app);
+
+export {middleware};
