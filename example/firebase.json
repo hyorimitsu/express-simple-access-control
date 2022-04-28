@@ -1,6 +1,6 @@
 {
   "functions": {
-    "predeploy": "npm --prefix \"$RESOURCE_DIR\" run build"
+    "predeploy": "npm --prefix \"$RESOURCE_DIR\" run build && mkdir functions/lib/public && mv public/* functions/lib/public/"
   },
   "hosting": {
     "public": "public",
@@ -8,6 +8,12 @@
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "function": "middleware"
+      }
     ]
   }
 }

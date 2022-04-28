@@ -613,10 +613,10 @@ express-basic-auth@^1.2.1:
   dependencies:
     basic-auth "^2.0.1"
 
-express-simple-access-control@^0.0.5:
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/express-simple-access-control/-/express-simple-access-control-0.0.5.tgz#e8f646f4c5b9652650313fe083fba1d062eee30c"
-  integrity sha512-yN6Vb1zOB7bdzWcj5b69dlcJZY/ioxOORjSVm2TmMhcZRz+HVyACV+POudyFwLcbKiPZg192Q6Zm4oPfXBYYhg==
+express-simple-access-control@^0.0.9:
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/express-simple-access-control/-/express-simple-access-control-0.0.9.tgz#2e0be6e5e19f141e934146ab5cc17383857c3ca5"
+  integrity sha512-QBwFXhir5fGam9g3fbhobgf6LoQC8KmBMnEv8IK6v8qJ9kimW9XgEckmvTJbxgz1LekxveHZaRS6F2EOlsg1AA==
   dependencies:
     express-basic-auth "^1.2.1"
 
