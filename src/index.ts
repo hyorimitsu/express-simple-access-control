@@ -1,6 +1,7 @@
 import * as core from "express-serve-static-core";
 import basicAuthMiddleware, {Option as BasicAuthOption} from "./basic_auth";
 import ipFilterMiddleware, {Option as IPFilterOption} from "./ip_filter";
+import mixAuthMiddleware from "./mix_auth";
 
 /**
  * Option for express-simple-access-control
@@ -28,8 +29,18 @@ const useAccessControlMiddleware = (app: core.Express, option: Option) => {
         ipFilterOption,
     } = option;
 
-    if (ipFilterOption) app.use(ipFilterMiddleware(ipFilterOption));
-    if (basicAuthOption) app.use(basicAuthMiddleware(basicAuthOption));
+    if (ipFilterOption && basicAuthOption) {
+        app.use(mixAuthMiddleware({
+            basicAuthOption,
+            ipFilterOption,
+        }));
+
+    } else if (ipFilterOption) {
+        app.use(ipFilterMiddleware(ipFilterOption));
+
+    } else if (basicAuthOption) {
+        app.use(basicAuthMiddleware(basicAuthOption));
+    }
 };
 
 export default useAccessControlMiddleware;

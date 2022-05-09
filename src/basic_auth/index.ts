@@ -1,9 +1,14 @@
-import * as expressBasicAuth from "express-basic-auth";
+import {NextFunction, Request, Response} from "express";
+import auth from "basic-auth";
+import compare from "tsscmp";
 
 /**
  * Option for Basic Auth
  */
 type Option = {
+    /**
+     * Allow user list.
+     */
     users: User[]
 };
 
@@ -16,16 +21,29 @@ type User = {
 };
 
 /**
- * Convert {@link User} to an object where username is key and password is value.
- * @param {User[]} users - {@link User} array
- * @return {{[key: string]: string}} - an object where username is key and password is value
+ * Verify that the request user matches the defined user.
+ * @param {Request} req - request
+ * @param {User[]} users - allow user list
+ * @return boolean - true if a matching user exists, otherwise false
  */
-const createUsersObject = (users: User[]) => {
-    const result: { [key: string]: string } = {};
-    for (const user of users) {
-        result[user.username] = user.password;
-    }
-    return result;
+const verify = (req: Request, users: User[]) => {
+    const reqUser = auth(req);
+    if (!reqUser) return false;
+
+    const defUser = users.find(user => user.username === reqUser.name);
+    if (!defUser) return false;
+
+    return compare(reqUser.name, defUser.username) && compare(reqUser.pass, defUser.password);
+};
+
+/**
+ * Sets information for displaying a Basic Authentication popup in the response status and headers.
+ * @param {Response} res - response
+ */
+const setUnauthenticated = (res: Response) => {
+    res.statusCode = 401;
+    res.setHeader('WWW-Authenticate', 'Basic realm="express-simple-access-control"');
+    res.end();
 };
 
 /**
@@ -33,12 +51,19 @@ const createUsersObject = (users: User[]) => {
  * @param {Option} option - option for basic auth
  * @return {RequestHandler} - middleware
  */
-const basicAuthMiddleware = (option: Option) => {
-    return expressBasicAuth({
-        challenge: true,
-        users: createUsersObject(option.users),
-    });
+const middleware = (option: Option) => {
+    const {
+        users,
+    } = option;
+
+    return (req: Request, res: Response, next: NextFunction) => {
+        if (verify(req, users)) {
+            next();
+            return;
+        }
+        setUnauthenticated(res);
+    };
 };
 
-export default basicAuthMiddleware;
-export {Option, User};
+export default middleware;
+export {verify, setUnauthenticated, Option, User};

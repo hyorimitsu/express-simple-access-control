@@ -22,11 +22,22 @@ type Option = {
 };
 
 /**
+ * Verify that the request IP matches the defined IP.
+ * @param {Request} req - request
+ * @param {string[]} allowIPs - allow IP list
+ * @return boolean - true if a matching IP exists, otherwise false
+ */
+const verify = (req: Request, allowIPs: string[]) => {
+    const clientIP = getClientIP(req);
+    return !!clientIP && allowIPs.includes(clientIP);
+};
+
+/**
  * Get the IP Filter middleware.
  * @param {Option} option - option for IP filter
  * @return {RequestHandler} - middleware
  */
-const ipFilterMiddleware = (option: Option) => {
+const middleware = (option: Option) => {
     const {
         allowsIPs = [],
         errStatusCode = 401,
@@ -34,14 +45,13 @@ const ipFilterMiddleware = (option: Option) => {
     } = option;
 
     return (req: Request, res: Response, next: NextFunction) => {
-        const clientIP = getClientIP(req);
-        if (!clientIP || !allowsIPs.includes(clientIP)) {
-            res.status(errStatusCode).send(errMessage);
+        if (verify(req, allowsIPs)) {
+            next();
             return;
         }
-        next();
+        res.status(errStatusCode).send(errMessage);
     };
 };
 
-export default ipFilterMiddleware;
-export {Option};
+export default middleware;
+export {verify, Option};
