@@ -15,7 +15,7 @@ This is a library for restricting access to applications implemented in express.
 An example of Basic Authentication is as follows.
 
 ```typescript
-import * as express from "express";
+import express from "express";
 import useAccessControlMiddleware, {Option} from "express-simple-access-control";
 
 const app = express();
@@ -37,7 +37,7 @@ useAccessControlMiddleware(app, {
 An example of IP Filter is as follows.
 
 ```typescript
-import * as express from "express";
+import express from "express";
 import useAccessControlMiddleware, {Option} from "express-simple-access-control";
 
 const app = express();
@@ -52,6 +52,43 @@ useAccessControlMiddleware(app, {
 } as Option);
 
 // ...
+```
+
+### Combination of IP Filter and Basic Authentication
+
+An example combination of IP Filter and Basic Authentication is as follows.
+
+```typescript
+import express from "express";
+import useAccessControlMiddleware, {Option} from "express-simple-access-control";
+
+const app = express();
+
+// apply access restrictions
+useAccessControlMiddleware(app, {
+    basicAuthOption: {
+        users: [
+            {username: 'username', password: 'password'},
+        ],
+    },
+    ipFilterOption: {
+        allowsIPs: ['XXX.XXX.XXX.XXX'],
+        errStatusCode: 404,
+        errMessage: 'Not Found',
+    },
+} as Option);
+
+// ...
+```
+
+In this case, if client IP is allowed, it is considered accessible, and if not allowed, it is shifted to Basic authentication.
+
+```mermaid
+flowchart LR
+p1(IP Filter) -- ok --> s1((Success))
+p1 -- invalid --> p2
+p2(Basic Auth) -- ok --> s1
+p2 -- invalid --> s2((Unauthorized))
 ```
 
 ## Options
