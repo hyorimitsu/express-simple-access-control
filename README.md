@@ -22,11 +22,11 @@ const app = express();
 
 // apply access restrictions
 useAccessControlMiddleware(app, {
-    basicAuthOption: {
-        users: [
-            {username: 'username', password: 'password'},
-        ],
-    },
+  basicAuthOption: {
+    users: [
+      {username: 'username', password: 'password'},
+    ],
+  },
 } as Option);
 
 // ...
@@ -44,11 +44,11 @@ const app = express();
 
 // apply access restrictions
 useAccessControlMiddleware(app, {
-    ipFilterOption: {
-        allowsIPs: ['XXX.XXX.XXX.XXX'],
-        errStatusCode: 404,
-        errMessage: 'Not Found',
-    },
+  ipFilterOption: {
+    allowsIPs: ['XXX.XXX.XXX.XXX'],
+    errStatusCode: 404,
+    errMessage: 'Not Found',
+  },
 } as Option);
 
 // ...
@@ -66,16 +66,16 @@ const app = express();
 
 // apply access restrictions
 useAccessControlMiddleware(app, {
-    basicAuthOption: {
-        users: [
-            {username: 'username', password: 'password'},
-        ],
-    },
-    ipFilterOption: {
-        allowsIPs: ['XXX.XXX.XXX.XXX'],
-        errStatusCode: 404,
-        errMessage: 'Not Found',
-    },
+  basicAuthOption: {
+    users: [
+      {username: 'username', password: 'password'},
+    ],
+  },
+  ipFilterOption: {
+    allowsIPs: ['XXX.XXX.XXX.XXX'],
+    errStatusCode: 404,
+    errMessage: 'Not Found',
+  },
 } as Option);
 
 // ...
