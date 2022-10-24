@@ -609,10 +609,10 @@ event-target-shim@^5.0.0:
   resolved "https://registry.yarnpkg.com/event-target-shim/-/event-target-shim-5.0.1.tgz#5d4d3ebdf9583d63a5333ce2deb7480ab2b05789"
   integrity sha512-i/2XbnSz/uxRCU6+NdVJgKWDTM427+MqYbkQzD321DuCQJUqOuJKIA0IM2+W2xtYHdKOmZ4dR6fExsd4SXL+WQ==
 
-express-simple-access-control@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/express-simple-access-control/-/express-simple-access-control-1.0.0.tgz#f22c56afa6627590ea6eee888616e58cef9e02b7"
-  integrity sha512-DWXiGhm76NKabJfrECV3vVPyqeTd3AdWL34koygiL3+O2r5vb0OGarDEcaiVirV3KDLqJeMxFOA9vrcOWA3Vew==
+express-simple-access-control@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/express-simple-access-control/-/express-simple-access-control-1.0.1.tgz#c1704360cb3e219f74dec14d17ce8427857852c9"
+  integrity sha512-fKI7c8IK4LT0bHYsga4AekeJwfI71WWqSIE59mHsQHIcUXkoENIx3/Kusst7y7wKhG+bIwVSEaRv2+Gw2cme/w==
   dependencies:
     basic-auth "^2.0.1"
     tsscmp "^1.0.6"
