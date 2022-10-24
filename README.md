@@ -1,6 +1,11 @@
 express-simple-access-control
 ---
 
+[![npm version](https://badge.fury.io/js/express-simple-access-control.svg)](https://badge.fury.io/js/express-simple-access-control)
+[![Test](https://github.com/hyorimitsu/express-simple-access-control/actions/workflows/test.yaml/badge.svg)](https://github.com/hyorimitsu/express-simple-access-control/actions/workflows/test.yaml)
+[![Code Style: Google](https://img.shields.io/badge/code%20style-google-blueviolet.svg)](https://github.com/google/gts)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 This is a library for restricting access to applications implemented in express.
 
 ## Supported Restriction Methods
