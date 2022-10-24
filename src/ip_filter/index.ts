@@ -1,24 +1,24 @@
-import {NextFunction, Request, Response} from "express";
-import getClientIP from "./client_ip";
+import {NextFunction, Request, Response} from 'express';
+import getClientIP from './client_ip';
 
 /**
  * Option for IP Filter
  */
 type Option = {
-    /**
-     * Allow IP list.
-     */
-    allowsIPs: string[]
+  /**
+   * Allow IP list.
+   */
+  allowsIPs: string[];
 
-    /**
-     * Response status in case of error.
-     */
-    errStatusCode: number
+  /**
+   * Response status in case of error.
+   */
+  errStatusCode: number;
 
-    /**
-     * Response message in case of error.
-     */
-    errMessage: string
+  /**
+   * Response message in case of error.
+   */
+  errMessage: string;
 };
 
 /**
@@ -28,8 +28,8 @@ type Option = {
  * @return boolean - true if a matching IP exists, otherwise false
  */
 const verify = (req: Request, allowIPs: string[]) => {
-    const clientIP = getClientIP(req);
-    return !!clientIP && allowIPs.includes(clientIP);
+  const clientIP = getClientIP(req);
+  return !!clientIP && allowIPs.includes(clientIP);
 };
 
 /**
@@ -38,19 +38,19 @@ const verify = (req: Request, allowIPs: string[]) => {
  * @return {RequestHandler} - middleware
  */
 const middleware = (option: Option) => {
-    const {
-        allowsIPs = [],
-        errStatusCode = 401,
-        errMessage = 'Unauthorized',
-    } = option;
+  const {
+    allowsIPs = [],
+    errStatusCode = 401,
+    errMessage = 'Unauthorized',
+  } = option;
 
-    return (req: Request, res: Response, next: NextFunction) => {
-        if (verify(req, allowsIPs)) {
-            next();
-            return;
-        }
-        res.status(errStatusCode).send(errMessage);
-    };
+  return (req: Request, res: Response, next: NextFunction) => {
+    if (verify(req, allowsIPs)) {
+      next();
+      return;
+    }
+    res.status(errStatusCode).send(errMessage);
+  };
 };
 
 export default middleware;

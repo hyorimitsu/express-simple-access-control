@@ -1,23 +1,23 @@
-import {NextFunction, Request, Response} from "express";
-import auth from "basic-auth";
-import compare from "tsscmp";
+import {NextFunction, Request, Response} from 'express';
+import auth from 'basic-auth';
+import compare from 'tsscmp';
 
 /**
  * Option for Basic Auth
  */
 type Option = {
-    /**
-     * Allow user list.
-     */
-    users: User[]
+  /**
+   * Allow user list.
+   */
+  users: User[];
 };
 
 /**
  * User Info for Basic Auth
  */
 type User = {
-    username: string
-    password: string
+  username: string;
+  password: string;
 };
 
 /**
@@ -27,13 +27,16 @@ type User = {
  * @return boolean - true if a matching user exists, otherwise false
  */
 const verify = (req: Request, users: User[]) => {
-    const reqUser = auth(req);
-    if (!reqUser) return false;
+  const reqUser = auth(req);
+  if (!reqUser) return false;
 
-    const defUser = users.find(user => user.username === reqUser.name);
-    if (!defUser) return false;
+  const defUser = users.find(user => user.username === reqUser.name);
+  if (!defUser) return false;
 
-    return compare(reqUser.name, defUser.username) && compare(reqUser.pass, defUser.password);
+  return (
+    compare(reqUser.name, defUser.username) &&
+    compare(reqUser.pass, defUser.password)
+  );
 };
 
 /**
@@ -41,9 +44,12 @@ const verify = (req: Request, users: User[]) => {
  * @param {Response} res - response
  */
 const setUnauthenticated = (res: Response) => {
-    res.statusCode = 401;
-    res.setHeader('WWW-Authenticate', 'Basic realm="express-simple-access-control"');
-    res.end();
+  res.statusCode = 401;
+  res.setHeader(
+    'WWW-Authenticate',
+    'Basic realm="express-simple-access-control"'
+  );
+  res.end();
 };
 
 /**
@@ -52,17 +58,15 @@ const setUnauthenticated = (res: Response) => {
  * @return {RequestHandler} - middleware
  */
 const middleware = (option: Option) => {
-    const {
-        users,
-    } = option;
+  const {users} = option;
 
-    return (req: Request, res: Response, next: NextFunction) => {
-        if (verify(req, users)) {
-            next();
-            return;
-        }
-        setUnauthenticated(res);
-    };
+  return (req: Request, res: Response, next: NextFunction) => {
+    if (verify(req, users)) {
+      next();
+      return;
+    }
+    setUnauthenticated(res);
+  };
 };
 
 export default middleware;

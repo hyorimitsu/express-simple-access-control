@@ -1,23 +1,23 @@
-import * as functions from "firebase-functions";
-import * as express from "express";
-import useAccessControlMiddleware, {Option} from "express-simple-access-control";
+import * as functions from 'firebase-functions';
+import * as express from 'express';
+import useAccessControlMiddleware, {
+  Option,
+} from 'express-simple-access-control';
 
 const app = express();
 
 // apply access restrictions
 useAccessControlMiddleware(app, {
-    // enable basic auth
-    basicAuthOption: {
-        users: [
-            {username: 'username', password: 'password'},
-        ],
-    },
-    // disable ip filter
-    // ipFilterOption: {
-    //     allowsIPs: ['XXX.XXX.XXX.XXX'],
-    //     errStatusCode: 404,
-    //     errMessage: 'Not Found',
-    // },
+  // enable basic auth
+  basicAuthOption: {
+    users: [{username: 'username', password: 'password'}],
+  },
+  // disable ip filter
+  // ipFilterOption: {
+  //     allowsIPs: ['XXX.XXX.XXX.XXX'],
+  //     errStatusCode: 404,
+  //     errMessage: 'Not Found',
+  // },
 } as Option);
 
 app.use(express.static(__dirname + '/public/'));
