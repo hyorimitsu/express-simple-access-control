@@ -10,12 +10,12 @@ type Option = {
   /**
    * Option for basic auth. Enabled if specified.
    */
-  basicAuthOption: BasicAuthOption | undefined;
+  basicAuthOption?: BasicAuthOption;
 
   /**
    * Option for ip filter. Enabled if specified.
    */
-  ipFilterOption: IPFilterOption | undefined;
+  ipFilterOption?: IPFilterOption;
 };
 
 /**

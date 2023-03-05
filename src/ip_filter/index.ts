@@ -13,12 +13,12 @@ type Option = {
   /**
    * Response status in case of error.
    */
-  errStatusCode: number;
+  errStatusCode?: number;
 
   /**
    * Response message in case of error.
    */
-  errMessage: string;
+  errMessage?: string;
 };
 
 /**
@@ -38,11 +38,7 @@ const verify = (req: Request, allowIPs: string[]) => {
  * @return {RequestHandler} - middleware
  */
 const middleware = (option: Option) => {
-  const {
-    allowsIPs = [],
-    errStatusCode = 401,
-    errMessage = 'Unauthorized',
-  } = option;
+  const {allowsIPs, errStatusCode = 401, errMessage = 'Unauthorized'} = option;
 
   return (req: Request, res: Response, next: NextFunction) => {
     if (verify(req, allowsIPs)) {
