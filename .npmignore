@@ -4,7 +4,11 @@
 
 example
 src
+.editorconfig
+.eslintignore
+.eslintrc.json
 .gitignore
+.prettierrc.js
 tsconfig.json
 
 tools
