@@ -21,7 +21,7 @@ An example of Basic Authentication is as follows.
 
 ```typescript
 import express from "express";
-import useAccessControlMiddleware, {Option} from "express-simple-access-control";
+import useAccessControlMiddleware from "express-simple-access-control";
 
 const app = express();
 
@@ -32,7 +32,7 @@ useAccessControlMiddleware(app, {
       {username: 'username', password: 'password'},
     ],
   },
-} as Option);
+});
 
 // ...
 ```
@@ -43,7 +43,7 @@ An example of IP Filter is as follows.
 
 ```typescript
 import express from "express";
-import useAccessControlMiddleware, {Option} from "express-simple-access-control";
+import useAccessControlMiddleware from "express-simple-access-control";
 
 const app = express();
 
@@ -54,7 +54,7 @@ useAccessControlMiddleware(app, {
     errStatusCode: 404,
     errMessage: 'Not Found',
   },
-} as Option);
+});
 
 // ...
 ```
@@ -65,7 +65,7 @@ An example combination of IP Filter and Basic Authentication is as follows.
 
 ```typescript
 import express from "express";
-import useAccessControlMiddleware, {Option} from "express-simple-access-control";
+import useAccessControlMiddleware from "express-simple-access-control";
 
 const app = express();
 
@@ -81,7 +81,7 @@ useAccessControlMiddleware(app, {
     errStatusCode: 404,
     errMessage: 'Not Found',
   },
-} as Option);
+});
 
 // ...
 ```
@@ -100,17 +100,17 @@ p2 -- invalid --> s2((Unauthorized))
 
 ### Basic Authentication
 
-|field name|default|description|
-|----------|-------|-----------|
-|users     |       |List of objects with Basic authentication username and password.|
+| field name | default | description                                                      |
+|------------|---------|------------------------------------------------------------------|
+| users      | []      | List of objects with Basic authentication username and password. |
 
 ### IP Filter
 
-|field name   |default     |description|
-|-------------|------------|-----------|
-|allowIPs     |            |List of accessible IP addresses.|
-|errStatusCode|401         |Response status when an access is received from an IP address not included in allowIPs.|
-|errMessage   |Unauthorized|Response message when an access is received from an IP address not included in allowIPs.|
+| field name    | default      | description                                                                              |
+|---------------|--------------|------------------------------------------------------------------------------------------|
+| allowIPs      | []           | List of accessible IP addresses.                                                         |
+| errStatusCode | 401          | Response status when an access is received from an IP address not included in allowIPs.  |
+| errMessage    | Unauthorized | Response message when an access is received from an IP address not included in allowIPs. |
 
 ## How to get an IP address
 
