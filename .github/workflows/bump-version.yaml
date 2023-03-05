@@ -16,7 +16,7 @@ jobs:
         id: tag
         run: |
           VERSION=$(git tag --sort=-creatordate | head -1)
-          echo ::set-output name=VERSION::$VERSION
+          echo VERSION=$VERSION >> $GITHUB_OUTPUT
 
       - name: Update package.json
         run: |
